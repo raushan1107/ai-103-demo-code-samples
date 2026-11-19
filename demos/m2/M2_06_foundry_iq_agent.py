@@ -37,13 +37,8 @@ def print_bad_request_details(error: BadRequestError) -> None:
     elif body is not None:
         print(f"Service error details: {body}")
 
-# kb-knowledgebase889-x5rsp
-# RemoteTool
-# Project Managed Identity
-# No key available
-
-# https://azure-ai-raushanranjan-foundryiq.search.windows.net/knowledgebases/knowledgebase889/mcp?api-version=2026-08-01-preview
-# raushanr1107@raushanr1107gmail.com
+# Example setup: use the knowledge-base MCP endpoint and its matching project
+# connection, configured for the Foundry project's managed identity.
 
 def main() -> None:
     credential = AzureCliCredential()

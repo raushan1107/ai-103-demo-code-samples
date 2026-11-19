@@ -50,7 +50,7 @@ cd ai-103-demo-code-samples
 **Windows PowerShell**
 
 ```powershell
-py -3.10 -m venv .venv
+py -m venv .venv
 .\.venv\Scripts\Activate.ps1
 ```
 
