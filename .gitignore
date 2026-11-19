@@ -1,0 +1,21 @@
+# Local secrets
+.env
+.env.*
+!.env.example
+
+# Local files and generated Python artifacts
+sample.txt
+test.py
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# Generated demo output and editor/test caches
+sample_data/speech_output.wav
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Classroom slide decks are not part of the code-samples repository
+*.pptx

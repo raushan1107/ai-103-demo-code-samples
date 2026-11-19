@@ -1,0 +1,5 @@
+M1 Demo Expense Policy
+======================
+For this classroom example, taxi rides are reimbursable up to USD 75 per trip.
+Include the business purpose and receipt with the expense claim.
+For a taxi fare above USD 75, obtain manager approval before travel.
