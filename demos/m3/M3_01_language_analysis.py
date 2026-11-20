@@ -31,3 +31,17 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
+
+# M3_01 WALKTHROUGH AND TEST
+# 1. TextAnalyticsClient uses the Language endpoint and key from .env.
+# 2. The prompt reads one text sample; an empty line exits without an API call.
+# 3. detect_language reports the language, recognize_entities lists named
+#    entities, and recognize_pii_entities lists detected PII categories/spans.
+#    This introductory script does not redact the submitted text.
+#
+# From the repository root run:
+#   python demos/m3/M3_01_language_analysis.py
+# Enter: Asha Rao works at Contoso in Pune. Contact asha@example.com.
+# Expected: English detection and entity/PII results; exact entities can vary.
+# Use synthetic text only; the Language service may miss sensitive spans.

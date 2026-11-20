@@ -23,7 +23,7 @@ This repository contains runnable examples that accompany AI-103 training:
 | --- | --- | ---: |
 | **M1 — Model APIs and application patterns** | Responses, conversations, prompting, hosted tools, function calling, RAG, evaluation, fine-tuning concepts, responsible AI | 15 |
 | **M2 — Agents and workflows** | Microsoft Agent Framework, function tools, MCP, Foundry IQ retrieval, sequential agents | 8 |
-| **M3 — Language, speech, and translation** | Azure AI Language, Speech, Language/Speech agents, text and speech translation | 5 |
+| **M3 — Language, speech, and translation** | Azure AI Language, Speech, Language/Speech agents, text and speech translation | 6 |
 
 The examples are designed for learning and demonstration, not production deployment. They keep core calls visible and explain where portal setup, credentials, permissions, or human review are required.
 
@@ -92,7 +92,7 @@ Open `.env` and replace placeholders for the demos you plan to run. The file is 
 | **M2** | Foundry project endpoint and model deployment; sign in with `az login`. M2_06 additionally needs the knowledge-base MCP endpoint and its project connection ID. M2_08 needs the name of an existing prompt agent. |
 | **M3** | Azure AI Language, Speech, and Translator endpoints/keys/regions as needed. Agent demos also need an existing Foundry project and saved agent names. The Speech MCP demo may need a container SAS URL. |
 
-**Important:** M1 uses an OpenAI-compatible endpoint and API key. M2 uses a Foundry **project endpoint** and Entra ID via Azure CLI; do not substitute the M1 endpoint. For M2:
+**Important:** M1 uses an OpenAI-compatible endpoint and API key. M2 uses a Foundry **project endpoint** and Entra ID via Azure CLI; do not substitute the M1 endpoint. The M3 spoken-question assistant uses the M1 Foundry settings alongside its speech, language, and translator resources. For M2:
 
 ```powershell
 az login
@@ -138,7 +138,7 @@ Some examples create temporary Foundry agents or conversations and attempt clean
 
 ### Module 3 — Language, speech, and translation
 
-Start with [M3_01_language_analysis.py](demos/m3/M3_01_language_analysis.py). The set also includes Speech synthesis/transcription, clients for portal-created Language and Speech agents, and text/speech translation.
+Start with [M3_01_language_analysis.py](demos/m3/M3_01_language_analysis.py). The set also includes Speech synthesis/transcription, a local Language tool-calling assistant, a client for a portal-created Speech agent, text/speech translation, and an English/Hindi speech-to-LLM assistant.
 
 - [M3 run guide](guides/M3_DEMOS_RUN_GUIDE.md)
 

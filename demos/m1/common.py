@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 from openai import OpenAI
 
 # Resolve project root so dotenv works when launched from the root or VS Code.
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 # Load settings from the local .env file while preserving OS-provided overrides.
 load_dotenv(ROOT / ".env")
 

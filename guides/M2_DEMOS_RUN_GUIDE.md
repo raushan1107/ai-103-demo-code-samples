@@ -50,21 +50,13 @@ Enter `Add 18 and 24`. The script creates one temporary agent version and conver
 
 ## MCP client and local server
 
-This runnable pair keeps the protocol visible without relying on a public remote MCP endpoint. It follows the slide's server/client distinction: start the server, then run the client agent. The MCP server exposes only fixed, read-only teaching text. The project pins MCP SDK v2 (`mcp>=2.2,<3`): examples using v1's `FastMCP` import must be migrated to v2's `MCPServer` import.
-
-Terminal 1:
-
-```powershell
-python demos/m2/M2_04_local_mcp_server.py
-```
-
-Terminal 2:
+This runnable pair keeps the protocol visible without relying on a public remote MCP endpoint. The M2_05 client starts M2_04 as a child process and discovers its fixed, read-only teaching tool; no separate server terminal is needed. The project pins MCP SDK v2 (`mcp>=2.2,<3`): examples using v1's `FastMCP` import must be migrated to v2's `MCPServer` import.
 
 ```powershell
 python demos/m2/M2_05_mcp_client_agent.py
 ```
 
-Expected: the client discovers and calls `lookup_course_topic` from the local MCP server, then summarizes its result. Ask more than one question; type `quit` to exit the client. Stop the server with Ctrl+C after the client completes.
+Expected: the client discovers and calls `lookup_course_topic` from the local MCP server, then summarizes its result. Ask more than one question; type `quit` to exit. The client closes its child server automatically.
 
 ## Foundry IQ knowledge-base retrieval
 

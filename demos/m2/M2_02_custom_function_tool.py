@@ -30,29 +30,34 @@ def get_demo_weather(
 
 
 async def main() -> None:
-    agent = foundry_chat_client().as_agent(
-        name="demo-weather-agent",
-        instructions=(
-            "Answer weather questions using get_demo_weather. "
-            "Always say its results are fixed sample data, not a live forecast."
-        ),
-        tools=[get_demo_weather],
-    )
+    client, credential = foundry_chat_client()
+    try:
+        agent = client.as_agent(
+            name="demo-weather-agent",
+            instructions=(
+                "Answer weather questions using get_demo_weather. "
+                "Always say its results are fixed sample data, not a live forecast."
+            ),
+            tools=[get_demo_weather],
+        )
 
-    print("Demo Weather Agent is ready. Ask about a city, or type 'quit'.")
-    while True:
-        question = input("\nYou: ").strip()
-        if question.lower() in {"quit", "exit"}:
-            print("Agent: Goodbye!")
-            break
-        if not question:
-            print("Enter a question, or type 'quit' to leave.")
-            continue
+        print("Demo Weather Agent is ready. Ask about a city, or type 'quit'.")
+        while True:
+            question = input("\nYou: ").strip()
+            if question.lower() in {"quit", "exit"}:
+                print("Agent: Goodbye!")
+                break
+            if not question:
+                print("Enter a question, or type 'quit' to leave.")
+                continue
 
-        # The framework gives the model this tool's name, description, and schema.
-        # If it selects the tool, Python executes it and the framework returns the result.
-        result = await agent.run(question)
-        print(f"Agent: {result.text}")
+            # The framework gives the model this tool's name, description, and schema.
+            # If it selects the tool, Python executes it and the framework returns the result.
+            result = await agent.run(question)
+            print(f"Agent: {result.text}")
+    finally:
+        await client.close()
+        credential.close()
 
 
 if __name__ == "__main__":
@@ -64,3 +69,5 @@ if __name__ == "__main__":
 # Try: What is the demo weather in Seattle? Then ask about an unsupported city.
 # Workflow: prompt -> model selects tool -> local function returns data -> model answers.
 # approval_mode="never_require" is limited to this harmless read-only sample lookup.
+# Expected: the agent reports Seattle's fixed "light rain, 12 C" sample data or
+# explains that another city has no sample entry. It never calls a live weather API.

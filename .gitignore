@@ -13,6 +13,7 @@ __pycache__/
 
 # Generated demo output and editor/test caches
 sample_data/speech_output.wav
+sample_data/speech_answer.wav
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/

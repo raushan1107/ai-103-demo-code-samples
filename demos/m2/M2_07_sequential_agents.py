@@ -14,46 +14,50 @@ from common import foundry_chat_client
 
 async def main() -> None:
     # One client configuration can create multiple agents using the same model.
-    client = foundry_chat_client()
-    drafter = client.as_agent(
-        name="incident-drafter",
-        instructions=(
-            "Write a concise incident summary using only the user's notes. "
-            "Clearly mark facts that are missing; do not invent them."
-        ),
-    )
-    reviewer = client.as_agent(
-        name="incident-reviewer",
-        instructions=(
-            "Review the previous agent's incident summary. Return a corrected concise version "
-            "and list any missing facts that should be confirmed."
-        ),
-    )
+    client, credential = foundry_chat_client()
+    try:
+        drafter = client.as_agent(
+            name="incident-drafter",
+            instructions=(
+                "Write a concise incident summary using only the user's notes. "
+                "Clearly mark facts that are missing; do not invent them."
+            ),
+        )
+        reviewer = client.as_agent(
+            name="incident-reviewer",
+            instructions=(
+                "Review the previous agent's incident summary. Return a corrected concise version "
+                "and list any missing facts that should be confirmed."
+            ),
+        )
 
-    # Participant order defines the workflow: drafter first, reviewer second.
-    workflow = SequentialBuilder(participants=[drafter, reviewer]).build()
-    print("Incident workflow is ready. Enter incident notes, or type 'quit' to stop.")
+        # Participant order defines the workflow: drafter first, reviewer second.
+        workflow = SequentialBuilder(participants=[drafter, reviewer]).build()
+        print("Incident workflow is ready. Enter incident notes, or type 'quit' to stop.")
 
-    while True:
-        notes = input("\nIncident notes: ").strip()
-        if notes.lower() in {"quit", "exit"}:
-            print("Workflow: Goodbye!")
-            break
-        if not notes:
-            print("Enter notes, or type 'quit' to leave.")
-            continue
+        while True:
+            notes = input("\nIncident notes: ").strip()
+            if notes.lower() in {"quit", "exit"}:
+                print("Workflow: Goodbye!")
+                break
+            if not notes:
+                print("Enter notes, or type 'quit' to leave.")
+                continue
 
-        # The workflow runs each participant in order. The second agent receives context
-        # from the first and provides the terminal output collected below.
-        events = await workflow.run(notes)
-        outputs = events.get_outputs()
-        if not outputs:
-            print("The workflow returned no final output.")
-            continue
+            # The workflow runs each participant in order. The second agent receives context
+            # from the first and provides the terminal output collected below.
+            events = await workflow.run(notes)
+            outputs = events.get_outputs()
+            if not outputs:
+                print("The workflow returned no final output.")
+                continue
 
-        print("\nReviewed summary:")
-        for message in outputs[0].messages:
-            print(message.text)
+            print("\nReviewed summary:")
+            for message in outputs[0].messages:
+                print(message.text)
+    finally:
+        await client.close()
+        credential.close()
 
 
 if __name__ == "__main__":

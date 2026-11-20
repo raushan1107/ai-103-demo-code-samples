@@ -97,19 +97,13 @@ This example focuses on one tool cycle. Enter `Add 18 and 24` and watch these st
 
 ### 4–5. M2_04 and M2_05 — MCP server and client
 
-Open two VS Code terminal tabs. Start the server in terminal 1 and leave it running:
-
-```powershell
-python demos/m2/M2_04_local_mcp_server.py
-```
-
-Run the client in terminal 2:
+Run the MCP client from the repository root:
 
 ```powershell
 python demos/m2/M2_05_mcp_client_agent.py
 ```
 
-M2_04 uses the MCP Python SDK v2 API: `from mcp.server.mcpserver import MCPServer`, then `@server.tool()` to publish a deterministic local function. SDK v2 renamed `FastMCP` to `MCPServer` and changed its import path; old v1 snippets that import `mcp.server.fastmcp.FastMCP` fail with the pinned `mcp>=2.2,<3` dependency. M2_05's `MCPStdioTool` starts the server as a child process, discovers its tools, and exposes them to the model-backed agent. Run these two files in order. Try questions about agent, MCP, RAG, and an unsupported topic. Type `quit` in the client; its context manager shuts down the child server. Stop a server started directly with Ctrl+C.
+M2_04 uses the MCP Python SDK v2 API: `from mcp.server.mcpserver import MCPServer`, then `@server.tool()` to publish a deterministic local function. SDK v2 renamed `FastMCP` to `MCPServer` and changed its import path; old v1 snippets that import `mcp.server.fastmcp.FastMCP` fail with the pinned `mcp>=2.2,<3` dependency. M2_05's `MCPStdioTool` starts M2_04 as a child process, discovers its tools, and exposes them to the model-backed agent. No separate server terminal is needed. Try questions about agent, MCP, RAG, and an unsupported topic. Type `quit`; the client's context manager shuts down the child server.
 
 This pair uses a local server so the protocol can be demonstrated without a remote MCP service, project connection, or separate credentials. It models the same discovery/call pattern at local scope.
 

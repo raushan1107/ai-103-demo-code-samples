@@ -18,12 +18,14 @@ def required_setting(name: str) -> str:
 
 
 def foundry_chat_client():
-    """Return a Foundry chat client authenticated with the signed-in Azure CLI user."""
+    """Return a Foundry chat client and the Azure CLI credential it uses."""
     from agent_framework.foundry import FoundryChatClient
     from azure.identity import AzureCliCredential
 
-    return FoundryChatClient(
+    credential = AzureCliCredential()
+    client = FoundryChatClient(
         project_endpoint=required_setting("AZURE_AI_FOUNDRY_PROJECT_ENDPOINT"),
         model=required_setting("AZURE_AI_FOUNDRY_MODEL"),
-        credential=AzureCliCredential(),   #az login must be run first
+        credential=credential,  # az login must be run first
     )
+    return client, credential

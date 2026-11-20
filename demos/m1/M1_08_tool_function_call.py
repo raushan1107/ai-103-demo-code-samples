@@ -26,7 +26,12 @@ def main() -> None:
             "type": "function",
             "name": "get_demo_time",
             "description": "Get the current demo time in the Asia/Kolkata time zone.",
-            "parameters": {"type": "object", "properties": {}, "required": []},
+            "parameters": {
+                "type": "object",
+                "properties": {},
+                "required": [],
+                "additionalProperties": False,
+            },
             "strict": True,
         }
     ]

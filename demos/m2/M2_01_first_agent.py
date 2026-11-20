@@ -13,27 +13,31 @@ from common import foundry_chat_client
 
 async def main() -> None:
     # A chat client connects the local Python app to the deployed Foundry model.
-    client = foundry_chat_client()
-    # as_agent wraps the model client with a name and stable behavior instructions.
-    agent = client.as_agent(
-        name="python-tutor",
-        instructions="You are a concise Python tutor. Give a short explanation and a tiny example.",
-    )
+    client, credential = foundry_chat_client()
+    try:
+        # as_agent wraps the model client with a name and stable behavior instructions.
+        agent = client.as_agent(
+            name="python-tutor",
+            instructions="You are a concise Python tutor. Give a short explanation and a tiny example.",
+        )
 
-    print("Python Tutor is ready. Ask a Python question, or type 'quit'.")
-    while True:
-        question = input("\nYou: ").strip()
-        if question.lower() in {"quit", "exit"}:
-            print("Tutor: Goodbye!")
-            break
-        if not question:
-            print("Enter a question, or type 'quit' to leave.")
-            continue
+        print("Python Tutor is ready. Ask a Python question, or type 'quit'.")
+        while True:
+            question = input("\nYou: ").strip()
+            if question.lower() in {"quit", "exit"}:
+                print("Tutor: Goodbye!")
+                break
+            if not question:
+                print("Enter a question, or type 'quit' to leave.")
+                continue
 
-        # Each run sends the user turn to the agent and prints its response.
-        # The simple example creates no persistent cloud agent resource.
-        result = await agent.run(question)
-        print(f"Tutor: {result.text}")
+            # Each run sends the user turn to the agent and prints its response.
+            # The simple example creates no persistent cloud agent resource.
+            result = await agent.run(question)
+            print(f"Tutor: {result.text}")
+    finally:
+        await client.close()
+        credential.close()
 
 
 if __name__ == "__main__":
@@ -46,3 +50,6 @@ if __name__ == "__main__":
 # Sample interaction: What is a Python list? -> tutor explains and shows an example.
 # Try a follow-up: How do I add an item? Then type quit.
 # Workflow: input -> Agent (instructions + Foundry model) -> result.text -> terminal.
+# Expected: two concise Python explanations that use prior-turn context, followed by
+# "Tutor: Goodbye!" after quit. These are local Agent Framework objects, not a saved
+# portal agent.

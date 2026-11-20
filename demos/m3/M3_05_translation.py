@@ -29,12 +29,15 @@ def main() -> None:
     if audio_path:
         config = speechsdk.translation.SpeechTranslationConfig(
             subscription=required_setting("AZURE_SPEECH_KEY"),
-            endpoint=required_setting("AZURE_SPEECH_ENDPOINT"),
+            region=required_setting("AZURE_SPEECH_REGION"),
         )
         config.speech_recognition_language = "en-US"
         config.add_target_language("fr")
         audio = speechsdk.audio.AudioConfig(filename=audio_path)
-        result = speechsdk.translation.TranslationRecognizer(translation_config=config, audio_config=audio).recognize_once_async().get()
+        recognizer = speechsdk.translation.TranslationRecognizer(
+            translation_config=config, audio_config=audio
+        )
+        result = recognizer.recognize_once_async().get()
         if result.reason == speechsdk.ResultReason.TranslatedSpeech:
             print(f"Speech transcript: {result.text}")
             print(f"French translation: {result.translations.get('fr', '')}")
@@ -44,3 +47,18 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
+
+# M3_05 WALKTHROUGH AND TEST
+# 1. TextTranslationClient translates the first input to English.
+# 2. The optional Japanese input demonstrates transliteration to Latin script.
+# 3. The optional WAV path uses Speech translation from English to French.
+#    Enter skips either optional part.
+#
+# From the repository root run:
+#   python demos/m3/M3_05_translation.py
+# Text input: Buenos dias
+# Transliteration input: こんにちは (or press Enter)
+# WAV input: provide a short English WAV path (or press Enter)
+# Expected: English text translation; optional Latin transliteration and French
+# speech translation appear when those inputs are supplied.

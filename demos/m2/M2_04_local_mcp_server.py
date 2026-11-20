@@ -1,8 +1,7 @@
 """M2 demo server: expose fixed teaching tools over MCP stdio.
 
-Start from the project root in terminal 1:
-    python demos/m2/M2_04_local_mcp_server.py
-Leave it running while M2_05_mcp_client_agent.py is used in terminal 2.
+M2_05_mcp_client_agent.py starts this server as a child process automatically.
+Run this file by itself only when connecting an MCP inspector directly.
 The server prints no regular output to stdout because stdout carries MCP messages.
 """
 
@@ -32,6 +31,9 @@ if __name__ == "__main__":
     server.run(transport="stdio")
 
 
-# How to use: keep this process open in terminal 1; then run M2_05 in terminal 2.
-# MCP flow: client starts server process -> initializes protocol session -> discovers
-# tool schema -> sends a tool call -> server returns the fixed topic description.
+# Test the complete example from the repository root:
+#   python demos/m2/M2_05_mcp_client_agent.py
+# M2_05 starts this server automatically; do not start a second copy in another
+# terminal. Ask "Explain MCP in this course." Expected: a short answer based on the
+# fixed lookup_course_topic result. The server itself uses stdio and prints no
+# regular output; an MCP inspector can also launch this file to inspect its tool.

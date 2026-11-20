@@ -98,3 +98,18 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
+
+# PRESENTER WALKTHROUGH — M2_03 Foundry function calling
+#
+# What happens: the script creates a temporary Foundry agent with an add_numbers
+# schema. The model requests the function; Python calculates the result and sends
+# it back using the function call ID. The agent then writes the final response.
+# The finally block deletes this run's conversation and temporary agent version.
+#
+# Test from the repository root:
+#   python demos/m2/M2_03_foundry_function_calling.py
+# Enter: Add 18 and 24
+# Expected: "Python ran: 18 + 24 = 42", followed by an agent answer containing 42.
+# The model/agent call can incur Foundry usage charges; this script creates no
+# persistent agent, but verify cleanup if the process is interrupted.

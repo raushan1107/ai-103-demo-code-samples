@@ -34,3 +34,17 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
+
+# M3_04 WALKTHROUGH AND TEST
+# 1. AIProjectClient connects to the Foundry project using the signed-in Azure CLI
+#    identity. get_openai_client selects the saved agent from .env.
+# 2. The conversation loop sends each question to the saved agent and prints its
+#    reply. The finally blocks delete only the conversation and close the clients;
+#    they do not delete the portal agent.
+#
+# Configure the Foundry project endpoint, saved agent name, and Speech MCP
+# connection first; authenticate with `az login`. From the repository root run:
+#   python demos/m3/M3_04_connect_speech_agent.py
+# Ask for a short phrase to be spoken or a transcription task supported by the
+# configured agent. Expected: the saved agent's response; type quit to exit.
