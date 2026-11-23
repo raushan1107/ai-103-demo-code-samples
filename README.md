@@ -23,7 +23,7 @@ This repository contains runnable examples that accompany AI-103 training:
 | --- | --- | ---: |
 | **M1 — Model APIs and application patterns** | Responses, conversations, prompting, hosted tools, function calling, RAG, evaluation, fine-tuning concepts, responsible AI | 15 |
 | **M2 — Agents and workflows** | Microsoft Agent Framework, function tools, MCP, Foundry IQ retrieval, sequential agents | 8 |
-| **M3 — Language, speech, and translation** | Azure AI Language, Speech, Language/Speech agents, text and speech translation | 6 |
+| **M3 — Language, speech, and translation** | Azure AI Language, Speech, Language/Speech agents, text and speech translation, Voice Live, integrated enterprise lab | 8 |
 
 The examples are designed for learning and demonstration, not production deployment. They keep core calls visible and explain where portal setup, credentials, permissions, or human review are required.
 
@@ -141,8 +141,9 @@ Some examples create temporary Foundry agents or conversations and attempt clean
 Start with [M3_01_language_analysis.py](demos/m3/M3_01_language_analysis.py). The set also includes Speech synthesis/transcription, a local Language tool-calling assistant, a client for a portal-created Speech agent, text/speech translation, and an English/Hindi speech-to-LLM assistant.
 
 - [M3 run guide](guides/M3_DEMOS_RUN_GUIDE.md)
+- [M3 trainer lab index](demos/m3/README.md) (Speech Translation and GlobalCare enterprise application)
 
-Voice Live is covered as a portal/exercise walkthrough in the guide; this repository does not currently include a local Voice Live client.
+The M3_08 GlobalCare lab includes a terminal/local Voice Agent client using Foundry's realtime SDK, plus an integrated Streamlit application. It requires a saved voice-mode agent and Entra ID access.
 
 ## Repository layout
 

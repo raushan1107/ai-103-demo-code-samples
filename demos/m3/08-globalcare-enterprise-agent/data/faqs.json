@@ -1,0 +1,5 @@
+[
+  {"id":"F1","question":"How do I make an appointment?","answer":"Contact the hospital's Patient Reception using the details in this guide. Staff will confirm availability and the appointment.","tags":["appointment","booking"]},
+  {"id":"F2","question":"Can I ask for an interpreter?","answer":"Yes. Ask Patient Reception to record your preferred language when arranging your visit.","tags":["language","interpreter"]},
+  {"id":"F3","question":"Can this assistant provide medical advice?","answer":"No. This assistant only shares administrative information. For health concerns, contact a qualified clinician or local emergency services.","tags":["medical","scope"]}
+]

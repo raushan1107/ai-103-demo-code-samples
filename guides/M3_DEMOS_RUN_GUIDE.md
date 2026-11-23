@@ -51,13 +51,19 @@ Ask a question containing synthetic names, organizations, places, or contact det
 
 ## 4. Speech synthesis and transcription (slides 14–18)
 
-Provision Azure Speech, copy endpoint/key/region, and prepare a short, non-sensitive WAV file. Run:
+Provision Azure Speech and configure `AZURE_SPEECH_KEY`/`AZURE_SPEECH_REGION`. Live conversation also needs the M1 Foundry endpoint, key and deployment in `.env`, plus a working microphone and speaker. Run from the repository root:
 
 ```powershell
 python demos/m3/M3_02_speech_sdk.py
 ```
 
-Enter a sentence for synthesis, then enter the path to a WAV file for transcription (press Enter to skip transcription). Synthesis writes `sample_data/speech_output.wav`; transcription uses one-shot recognition and may return no match for long audio. Confirm the selected region and supported audio format before class.
+Choose one of three terminal options:
+
+1. **Live voice conversation:** press Enter at the prompt, then ask aloud, “What is the capital of France?” The terminal prints the recognized question and model response (for example, “The capital of France is Paris”); the response plays immediately through the default speaker. Say “quit” to end. For a repeatable test, synthesize that question with option 2, then enter `sample_data/speech_output.wav` at the live-mode input prompt. This sequential Speech SDK → Foundry model → Speech SDK flow writes no reply audio file.
+2. **Save synthesized audio:** enter `Hello, welcome to the speech demonstration.` The script saves `sample_data/speech_output.wav` for later playback.
+3. **Transcribe a WAV:** enter a local WAV path and read the transcript or NoMatch result.
+
+Use synthetic, non-sensitive questions. The live mode is a turn-by-turn terminal voice assistant; M3_08 is the separate bidirectional Foundry Voice Agent realtime demo.
 
 ## 5. Foundry Speech SDK and Speech MCP agent (slides 19–31)
 
@@ -76,7 +82,7 @@ The Microsoft MCP setup page controls the currently supported connection fields,
 
 ## 6. Voice Live agent (slides 32–36)
 
-Voice Live is event-based and needs a compatible resource/model, microphone and speaker, and a client implementation. In the Foundry agent playground, enable **Audio mode**, configure **Voice Live**, and test a short turn. The deck describes the client lifecycle: connect, configure audio devices, start a session, process events, and handle interruption events. This repository does not yet include a Voice Live client; use the linked [Voice Live agent exercise](https://aka.ms/mslearn-voice-live-agent) for its supported SDK and event details.
+Voice Live is event-based and needs a compatible Foundry project, saved **voice-mode** agent, microphone/speaker, and a client. This repository includes that client in [M3_08 GlobalCare](../demos/m3/08-globalcare-enterprise-agent/README.md); it uses Entra ID and the current Azure AI Projects Voice Agent realtime SDK. Create and test the voice-mode agent in Foundry first. The M3_02 terminal conversation is a separate turn-by-turn Speech SDK + model example.
 
 ## 7. Text and speech translation (slides 37–43)
 
@@ -99,6 +105,14 @@ python demos/m3/M3_06_speech_language_llm.py
 ```
 
 Ask a short question, for example “Who won the Under-19 Asia Cup in 2026?” or “2026 में अंडर-19 एशिया कप किसने जीता?” Press Enter at the WAV prompt to use the microphone, or supply a WAV path for a repeatable test. The model may not have current results; the prompt asks it to acknowledge when it is unsure. The exercise prints each pipeline stage, sends the PII-redacted English text to the model, and saves the spoken answer to `sample_data/speech_answer.wav` for playback. Use synthetic questions, since entity detection output can include the recognized entity text. Speech input is one turn per run.
+
+## Speech translation lab (M3_07)
+
+The independent scripts under `demos/m3/07-azure-speech-translation/` demonstrate microphone speech-to-text translation, single-target event-based synthesis, and manual speech synthesis for multiple target languages. Install its `requirements.txt`, set `AZURE_SPEECH_KEY` and `AZURE_SPEECH_REGION` in the root `.env`, then run each script from the repository root. See the [M3_07 trainer guide](../demos/m3/07-azure-speech-translation/README.md) for the classroom sequence, audio behavior, and troubleshooting.
+
+## GlobalCare enterprise lab (M3_08)
+
+The [GlobalCare AI lab](../demos/m3/08-globalcare-enterprise-agent/README.md) combines synthetic hospital data, Foundry tool calling, Language, Translator, Speech, and a saved Foundry voice agent. Install its separate requirements and launch Streamlit from the repository root. Run its offline tests from the M3_08 folder. Voice Live requires a configured **voice-mode** agent, project Entra ID permissions, and microphone/speaker access; text agents are not interchangeable.
 
 ## Cleanup and troubleshooting
 

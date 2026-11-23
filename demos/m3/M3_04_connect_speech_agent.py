@@ -7,13 +7,13 @@ from common import required_setting
 
 
 def main() -> None:
+    agent_name = required_setting("FOUNDRY_SPEECH_AGENT_NAME")
     credential = AzureCliCredential()
     project = AIProjectClient(
         endpoint=required_setting("AZURE_AI_FOUNDRY_PROJECT_ENDPOINT"),
         credential=credential,
     )
     try:
-        agent_name = required_setting("FOUNDRY_SPEECH_AGENT_NAME")
         with project.get_openai_client(agent_name=agent_name) as client:
             conversation = client.conversations.create()
             try:

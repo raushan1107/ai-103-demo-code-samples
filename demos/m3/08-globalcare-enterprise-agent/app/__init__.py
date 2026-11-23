@@ -1,0 +1,1 @@
+"""GlobalCare AI training application."""

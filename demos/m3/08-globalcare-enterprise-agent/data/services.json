@@ -1,0 +1,6 @@
+[
+  {"hospital_id":"GC-BLR-01","name":"Appointment scheduling","description":"Reception staff can help request, confirm, or reschedule a visit."},
+  {"hospital_id":"GC-BLR-01","name":"Interpreter request","description":"Language assistance can be requested when arranging a visit."},
+  {"hospital_id":"GC-SYD-01","name":"Appointment scheduling","description":"Reception staff handle appointment requests and confirmations."},
+  {"hospital_id":"GC-TYO-01","name":"Interpreter request","description":"Request an interpreter through reception before your visit."}
+]

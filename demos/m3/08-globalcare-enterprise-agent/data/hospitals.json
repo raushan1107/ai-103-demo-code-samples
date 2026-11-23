@@ -1,0 +1,5 @@
+[
+  {"id":"GC-BLR-01","name":"CityCare Hospital Bengaluru","city":"Bengaluru","country":"India","address":"42 Lakeview Road, Bengaluru","timezone":"Asia/Kolkata","languages":["en","hi","kn"],"phone":"+91-80-5550-0101","synthetic_emergency_contact":"000-000-0000 (fictional; do not call)"},
+  {"id":"GC-SYD-01","name":"HarbourLight Hospital Sydney","city":"Sydney","country":"Australia","address":"8 Harbour Crescent, Sydney","timezone":"Australia/Sydney","languages":["en","hi","ja"],"phone":"+61-2-5550-0102","synthetic_emergency_contact":"000-000-0000 (fictional; do not call)"},
+  {"id":"GC-TYO-01","name":"Sakura Bridge Hospital Tokyo","city":"Tokyo","country":"Japan","address":"3-12 Sakura Avenue, Tokyo","timezone":"Asia/Tokyo","languages":["ja","en","hi"],"phone":"+81-3-5550-0103","synthetic_emergency_contact":"000-000-0000 (fictional; do not call)"}
+]

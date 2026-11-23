@@ -1,0 +1,6 @@
+[
+  {"hospital_id":"GC-BLR-01","name":"Patient Reception","hours":"Mon-Fri 08:00-18:00","appointment_procedure":"Call or visit reception with your preferred date and the fictional patient reference issued by GlobalCare."},
+  {"hospital_id":"GC-BLR-01","name":"Imaging Services","hours":"Mon-Sat 07:00-19:00","appointment_procedure":"Ask Patient Reception to confirm availability and any preparation instructions from clinic staff."},
+  {"hospital_id":"GC-SYD-01","name":"Patient Reception","hours":"Daily 07:00-20:00","appointment_procedure":"Call reception or visit the front desk to request an appointment; staff confirm the booking."},
+  {"hospital_id":"GC-TYO-01","name":"Patient Reception","hours":"Mon-Fri 09:00-17:00","appointment_procedure":"Contact reception with your preferred date. An interpreter can be requested in advance."}
+]
